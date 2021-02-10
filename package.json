@@ -1,0 +1,18 @@
+{
+  "name": "vatrin",
+  "version": "1.0.0",
+  "description": "vatrin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "mssql": "^6.3.1",
+    "mysql2": "^2.2.5",
+    "tedious": "^11.0.3"
+  }
+}
