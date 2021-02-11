@@ -31,11 +31,18 @@ var con = mysql.createConnection({
 app.get("/", (req, res) => {
  res.render("index");
 })
+
+app.get("/edit", (req, res) => {
+
+  res.render("edit",{masseage});
+})
+
 app.get("/login", (req, res) => {
   var masseage = null;
 
   res.render("login",{masseage});
 })
+
 
 app .get("/home", authentication, (req, res) => {
   res.render("home", { user: req.session.user });
@@ -47,6 +54,10 @@ app.get("/logout", authentication, (req, res) => {
   res.redirect("/login");
 });
 
+app.get("/register", (req, res) => {
+  var masseage = null;
+  res.render("register",{masseage});
+})
 // route for handling post requirests
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -76,10 +87,46 @@ app.post("/login", async (req, res) => {
     res.redirect("/home");
       }
   });
+  
 
 
   })
 
+app.post("/register", async (req, res) => {
+    const { Name,email, password,Address } = req.body;
+    // check for missing filds
+    if (!Name||!email || !password||!Address) {
+      var masseage = "Please enter all the fields";
+      res.render('register.ejs',{masseage})
+      return;
+    }
+    console.log("name = "+Name+", email = "+ email+", password = "+password+", Address= "+ Address);
 
+    con.query("SELECT * FROM user  WHERE email ='" + email + "' || Name='" + Name + "'", function (err, result, fields) {
+      if (err)
+        throw err;
+        console.log(result.length);
+
+        if(result.length>0){
+          var masseage = "A user with that email already exits please try another one!";
+          res.render('register.ejs',{masseage})
+          return
+        }
+   
+    con.query("INSERT INTO `user` ( `Name`, `password`, `addresss`, `email`) VALUES ( '"+Name+"', '"+password+"', '"+Address+"', '"+email+"')", function (err, result, fields) {
+
+      if (err)
+        throw err;
+      console.log(result.length);
+  
+      var masseage = "You resgister to the website";
+      res.render('login.ejs',{masseage})
+    return;
+      
+      });
+  });
+    
+
+  });
 
 app.listen(3000); 
