@@ -4,11 +4,9 @@ var router = express.Router();
 // Create custom homepage
 // --------------------------------------------------
 router.get('/', function(req, res, next) {
-  const users = req.app.locals.users;
+    var masseage = null;
 
-  users.find().limit(3).toArray((err, recent) => {
-    res.render('index', { recent } );
-  });
+  res.render('index.ejs',{masseage})
 });
 // --------------------------------------------------
 
