@@ -1,9 +1,13 @@
 <%- include("./header") %>
-
+<div style="color:red">
+    <% if (masseage) { %>
+        <%= masseage %>
+      <% } %>
+    </div>
 <div class="container mt-5">
     <a href="/logout" class="btn btn-danger">Logout</a>
     <h2>Welcome <%= user.email %> </h2>
-    <a href="/Edit" class="btn btn-danger">Edit profile</a>
+    <a  href="/user/<%= user.id %>" class="btn btn-danger">Edit profile</a>
 
 </div>  
 

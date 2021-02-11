@@ -1,7 +1,9 @@
 <%- include("./header") %>
 
 <div class="container mt-5">
-    
+    <% if (masseage) { %>
+        <%= masseage %>
+      <% } %>
     <h1>Welcome to Vatrin website!</h1>
     <a href="/login" class="btn btn-primary">Login</a>
     <a href="/register" class="btn btn-danger">Register</a>
